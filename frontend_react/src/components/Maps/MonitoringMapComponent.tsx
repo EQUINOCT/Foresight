@@ -60,29 +60,7 @@ const MonitoringMapComponent: React.FC<MonitoringMapComponentProps> = React.memo
       
       map.on('load', async function () {
         let layerId, targetLayerId;
-
-        // Add Boundary layer sources to map
-        addBoundarySource(map, 'DISTRICT', config);
-        addBoundarySource(map, 'RIVER_BASIN', config);
-        addBoundarySource(map, 'PANCHAYAT', config);
-
-        // // Add Point layer sources to map
-        addPointSource(map, 'PRECIPITATION', config);
-        addPointSource(map, 'RESERVOIR', config);
-        addPointSource(map, 'RIVER', config);
-
         
-
-        addPointLayer(map, 'PRECIPITATION', 'circle', config);
-        addPointLayer(map, 'RESERVOIR', 'circle', config);
-        addPointLayer(map, 'RIVER', 'circle', config);
-
-        // Add District Boundary layer to map
-        layerId = addBoundaryLayer(map, 'DISTRICT', null, config);
-        setMapState({boundaryLevel: 0});
-        console.log(mapState);
-        cursorToPointerOnHover(map, 'DISTRICT', layerId, config);
-        await handleClickOnLayer(map, setMapState, setCurrentFeatureLayerId, config);
         
         
         setMap(map);
