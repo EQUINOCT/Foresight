@@ -38,7 +38,7 @@ const AnalyticsScreen: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <div className="monitor-screen overflow-hidden rounded-[15px] w-full h-full mx-auto relative">  
-          <Grid 
+          {/* <Grid 
             container 
             spacing={1} 
             sx={{ padding: '15px', height:'100%', alignItems: 'stretch' }} 
@@ -107,7 +107,7 @@ const AnalyticsScreen: React.FC = () => {
                       {renderStationAnalytics()}
                 </Grid>
               </Grid>  
-          </Grid>
+          </Grid> */}
         </div>
     </ThemeProvider>
   );

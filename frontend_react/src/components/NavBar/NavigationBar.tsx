@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import WidgetSelector from "./WidgetSelector";
 import LocationSelector from "./LocationSelector";
-import Avatar from "@mui/material/Avatar";
+import Person from "@mui/icons-material/Person";
 import { Link } from "react-router-dom";
 
 interface NavigationBarProps {
@@ -27,9 +27,9 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
   //const [activeControl, setActiveControl] = useState('monitor');
 
   return (
-    <header className="flex items-center py-4 w-full ">
+    <header className="flex items-center justify-between bg-zinc-900 bg-opacity-95 py-2 w-full ">
 
-      <nav className="flex justify-center">
+      {/* <nav className="flex justify-center">
         <ul className="flex gap-7 pl-[250px] items-center mt-2.5 list-none p-0 mb-2">
           {menuItems.map((item, index) => (  
             <li key={index} className="relative">
@@ -47,9 +47,13 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
             </li>
           ))}
         </ul>
-      </nav>
+      </nav> */}
+
+      <div className="text-forest-100 text-[40px] pl-[10px] font-inter"> 
+        Foresight
+      </div>
           
-      <div className="flex pr-[20px] gap-2 items-center justify-end">
+      <div className="flex gap-2 pr-[10px] items-center justify-end">
         <div className="widget-selector-container" style={{ width: 100 }}>
           {activeControl.toLowerCase() === "monitor" && activeView.toLowerCase() === "visualization" && (
               <WidgetSelector 
@@ -58,12 +62,24 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
               />
           )}
         </div>
-        <LocationSelector />
-        <Avatar 
-          sx={{bgcolor: "#00738c", width: 35, height:35}} 
-          alt="Apple Doe" 
-          src="/broken-image.jpg"
-        />
+        {/* <LocationSelector /> */}
+        <div
+          style={{
+            width: '35px',
+            height: '35px',
+            backgroundColor: 'rgba(39, 39, 42, 1))',  // Black with 81% opacity
+            borderRadius: '50%',
+            backgroundImage: 'url("/broken-image.jpg")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Person sx={{color: '#fff'}}/>
+        </div>
+
       </div>
     </header>
   );
