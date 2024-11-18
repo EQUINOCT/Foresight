@@ -43,6 +43,8 @@ const MonitorScreen: React.FC<MonitorScreenProps> = ({onWidgetToggle, visibleWid
   //   }));
   // };
 
+  const [selected, setSelected] = useState<string[]>([]);
+
   const [visibleGauges, setVisibleGauges] = useState(initialVisibleGauges);
 
   // const [visibleAlerts, setVisibleAlerts] = useState(true);
@@ -59,7 +61,7 @@ const MonitorScreen: React.FC<MonitorScreenProps> = ({onWidgetToggle, visibleWid
     <div className="monitor-screen w-full h-full relative flex flex-col rounded-[15px] overflow-hidden">
       <div className="absolute w-full h-full rounded-[15px] overflow-hidden">
         <MonitoringMapComponent
-        visibleGauges={visibleGauges} />
+        selected = {selected}/>
       </div>
 
       {/* Widgets */}
@@ -68,6 +70,7 @@ const MonitorScreen: React.FC<MonitorScreenProps> = ({onWidgetToggle, visibleWid
           <LayerComponent
             visibleGauges={visibleGauges}
             toggleGauge={toggleGauge}
+            
             onClose={() => onWidgetToggle('layers', false)}
           />
         )}

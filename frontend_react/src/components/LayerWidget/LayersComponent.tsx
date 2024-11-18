@@ -23,8 +23,31 @@ interface LayersProps {
 }
 
 const LayersComponent: React.FC<LayersProps> = ({ visibleGauges, toggleGauge, onClose }) => {
+<<<<<<< Updated upstream
   const [activeTab, setActiveTab] = useState<"Manual" | "Real Time">("Manual");
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
+=======
+  // const [activeTab, setActiveTab] = useState<"Manual" | "Real Time">("Manual");
+  // const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
+
+  const [selected, setSelected] = useState<string[]>([]);
+
+  const handleSelect = (label: string) => {
+    setSelected((prev) =>
+      prev.includes(label)
+        ? prev.filter((item) => item !== label) // Remove if already selected
+        : [...prev, label] // Add if not selected
+    );
+  };
+
+  const icons = [
+    { label: 'Conflict Zones', icon: <GiElephant /> },
+    { label: 'Buildings', icon: <LocationCity /> },
+    { label: 'Settlements', icon: <LocationCity /> },
+    { label: 'Waterbodies', icon: <Water /> },
+    { label: 'Roadways', icon: <FaRoad /> },
+  ];
+>>>>>>> Stashed changes
   
   return (
     <Draggable>

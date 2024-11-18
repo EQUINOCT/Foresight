@@ -13,18 +13,11 @@ import { AddCircleOutlineSharp } from '@mui/icons-material';
 import { generateCustomMarker, incrementState } from '../Layers/misc';
 
 interface MonitoringMapComponentProps {
-    visibleGauges: {
-      PRECIPITATION: boolean;
-      RESERVOIR: boolean;
-      TIDAL: boolean;
-      GROUNDWATER: boolean;
-      RIVER: boolean;
-      REGULATOR: boolean;
-  };
+  selected: string[];
 }
 
 // maptilersdk.config.apiKey = configData.MAP_TILER_API_KEY;
-const MonitoringMapComponent: React.FC<MonitoringMapComponentProps> = React.memo(({visibleGauges}: MonitoringMapComponentProps) => {
+const MonitoringMapComponent: React.FC<MonitoringMapComponentProps> = React.memo(({selected}) => {
   const { config } = useConfig();
   const [map, setMap] = useState<maplibregl.Map | null>(null);
   // const [layerVisible, setLayerVisible] = useState<boolean>(true);
@@ -61,6 +54,7 @@ const MonitoringMapComponent: React.FC<MonitoringMapComponentProps> = React.memo
       map.on('load', async function () {
         let layerId, targetLayerId;
 
+<<<<<<< Updated upstream
         // Add Boundary layer sources to map
         addBoundarySource(map, 'DISTRICT', config);
         addBoundarySource(map, 'RIVER_BASIN', config);
@@ -83,6 +77,61 @@ const MonitoringMapComponent: React.FC<MonitoringMapComponentProps> = React.memo
         console.log(mapState);
         cursorToPointerOnHover(map, 'DISTRICT', layerId, config);
         await handleClickOnLayer(map, setMapState, setCurrentFeatureLayerId, config);
+=======
+        map.addSource('boundary-data', {type: 'geojson', data: config.LAYERS.BOUNDARY.URL});
+        map.addLayer({
+          id: 'boundary',
+          type: 'fill',
+          // If source is a full layer, it will have Source ID, 
+          // else if generated, data passed directly.
+          source: 'boundary-data',
+          // layout: {
+          //     'visibility': 'visible'
+          // }
+          paint: {
+            'fill-color': 'yellow',
+            'fill-opacity': 0.3
+          }
+        }); 
+       
+        map.addSource('water-data', {type: 'geojson', data: config.LAYERS.WATER.URL});
+        map.addLayer({
+          id: 'water',
+          type: 'line',
+          // If source is a full layer, it will have Source ID, 
+          // else if generated, data passed directly.
+          source: 'water-data',
+          paint: {
+              'line-color': 'blue',
+              // 'fill-opacity': 1
+          },
+          layout: {
+              'visibility': 'none'
+          }
+        }); 
+        map.addSource('location-data', {type: 'geojson', data: config.LAYERS.LOCATION.URL});
+        map.addLayer({
+          id: 'location',
+          type: 'circle',
+          // If source is a full layer, it will have Source ID, 
+          // else if generated, data passed directly.
+          source: 'location-data',
+          layout: {
+              'visibility': 'none'
+          }
+        }); 
+        map.addSource('road-data', {type: 'geojson', data: config.LAYERS.ROAD.URL});
+        map.addLayer({
+          id: 'road',
+          type: 'line',
+          // If source is a full layer, it will have Source ID, 
+          // else if generated, data passed directly.
+          source: 'road-data',
+          layout: {
+              'visibility': 'none'
+          }
+        }); 
+>>>>>>> Stashed changes
         
         
         setMap(map);
@@ -97,11 +146,20 @@ const MonitoringMapComponent: React.FC<MonitoringMapComponentProps> = React.memo
 
   useEffect(() => {
     if (map) {
-    type GaugeType = keyof typeof visibleGauges;
-    // Add event listeners to toggle gauge layers
-    togglePointLayers(map, visibleGauges, mapState, currentFeatureLayerId, markerState, setMarkerState, config);
+      console.log(selected);
+      // Iterate over the selected layers
+      selected.forEach((layerId: string) => {
+        // Check if the layer exists in the map
+        if (map.getLayer(layerId)) {
+          // If the layer is selected, set it to visible
+          map.setLayoutProperty(layerId, 'visibility', 'visible');
+        } else {
+          // If the layer is not selected, set it to none (invisible)
+          map.setLayoutProperty(layerId, 'visibility', 'none');
+        }
+      });
     }
-  }, [visibleGauges, mapState, currentFeatureLayerId]);
+  }, [selected, mapState]);
 
 
   return (
@@ -109,17 +167,6 @@ const MonitoringMapComponent: React.FC<MonitoringMapComponentProps> = React.memo
       <div ref={mapContainer} className='map' />
     </div>
   )
-}, 
-(prevProps: MonitoringMapComponentProps, nextProps: MonitoringMapComponentProps) => {
-  // Custom comparison function
-  return (
-    prevProps.visibleGauges.PRECIPITATION === nextProps.visibleGauges.PRECIPITATION &&
-    prevProps.visibleGauges.RESERVOIR === nextProps.visibleGauges.RESERVOIR &&
-    prevProps.visibleGauges.TIDAL === nextProps.visibleGauges.TIDAL &&
-    prevProps.visibleGauges.GROUNDWATER === nextProps.visibleGauges.GROUNDWATER &&
-    prevProps.visibleGauges.RIVER === nextProps.visibleGauges.RIVER &&
-    prevProps.visibleGauges.REGULATOR === nextProps.visibleGauges.REGULATOR
-  );
 });
 
 export { MonitoringMapComponent };

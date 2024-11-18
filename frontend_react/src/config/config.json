@@ -13,6 +13,7 @@
         "URL": "https://res.cloudinary.com/dmjyqylzz/image/upload/v1726639729/marker_base_nprbdu.svg"
     },
     "LAYERS": {
+<<<<<<< Updated upstream
         "STATION": {
             "PRECIPITATION": {
                 "LAYER_ID": "precipitation-station-layer",
@@ -88,5 +89,23 @@
                 "OBJECT_NAME": "NAME"
             }
         }    
+=======
+        "BOUNDARY": {
+            "ID": "boundary",
+            "URL": "https://api.maptiler.com/data/bcdaf47f-b208-4871-9769-31033242f312/features.json?key=rOzi4RnlGlqlLc5ozKz4"
+        },
+        "WATER" : {
+            "ID" : "water",
+            "URL" : "https://api.maptiler.com/data/ba11d1e3-ed7b-40c9-bd41-a44dd918c0df/features.json?key=rOzi4RnlGlqlLc5ozKz4"
+        },
+        "LOCATION" : {
+            "ID" : "location",
+            "URL" : "https://api.maptiler.com/data/f74d7624-e2ca-40e6-bf5f-ed7cffe1f405/features.json?key=rOzi4RnlGlqlLc5ozKz4"
+        },
+        "ROAD" : {
+            "ID": "road",
+            "URL": "https://api.maptiler.com/data/c6d2609c-4828-44e2-8ff3-1f2776cfe9f8/features.json?key=rOzi4RnlGlqlLc5ozKz4"
+        }
+>>>>>>> Stashed changes
     }
 }

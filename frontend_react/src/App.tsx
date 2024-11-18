@@ -37,6 +37,7 @@ const App: React.FC = () => {
       }));
    };
 
+
    return (
       <Routes>
          <Route path="/" element={<MainLayout onWidgetToggle={onWidgetToggle} visibleWidgets={visibleWidgets}/>} >
