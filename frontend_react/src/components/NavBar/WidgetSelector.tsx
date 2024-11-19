@@ -2,6 +2,13 @@ import React, {useState} from "react";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import Paper from "@mui/material/Paper";
+import { styled } from "@mui/material/styles";
+
+const CustomPaper = styled(Paper)(({ theme }) => ({
+    backgroundColor: '#000',
+    color: '#fff',
+  }));
 
 interface WidgetSelectorProps {
   onWidgetToggle: (widget: "alerts" | "layers" | "legend", isVisible: boolean) => void;
@@ -35,21 +42,28 @@ const WidgetSelector: React.FC<WidgetSelectorProps> = ({ onWidgetToggle, visible
 
   return (
     <div>
-      <div className="flex justify-center w-[100px] bg-zinc-900 bg-opacity-80 rounded-full">
+      {/* <div className="flex justify-center w-[100px]"> */}
         <Button
           id="basic-button"
           aria-controls={open ? 'basic-menu' : undefined}
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
           onClick={handleClick}
+          sx={{ 
+            border: '0.5px solid rgba(174, 214, 151, 0.5)',
+            backgroundColor: '#18181b',
+            borderRadius: '20px',
+            paddingX: '20px',
+            justifyContent: 'center',
+          }}
         >
           <span 
            style={{ textTransform: 'capitalize' }}
-           className="text-white basis-auto font-inter">
+           className="text-white basis-auto font-sarabun">
             Widgets
           </span>
         </Button>
-      </div>
+      {/* </div> */}
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}
@@ -58,17 +72,46 @@ const WidgetSelector: React.FC<WidgetSelectorProps> = ({ onWidgetToggle, visible
         MenuListProps={{
           "aria-labelledby": "basic-button",
         }}
+        slotProps={{
+          paper: {
+            sx : {
+              backgroundColor: '#18181b',
+              color: '#fff',
+            },
+          },
+        }}
       >
-        <MenuItem onClick={() => onWidgetToggle("alerts", !visibleWidgets.alerts)}>
+        {/* <MenuItem onClick={() => onWidgetToggle("alerts", !visibleWidgets.alerts)}>
           {visibleWidgets.alerts ? "Hide Alerts" : "Show Alerts"}
-        </MenuItem>
-        <MenuItem onClick={() => onWidgetToggle("layers", !visibleWidgets.layers)}>
+        </MenuItem> */}
+        <MenuItem 
+        onClick={() => onWidgetToggle("layers", !visibleWidgets.layers)}
+        sx={{
+          bgcolor: 'transparent',
+          color: '#fff',
+          fontFamily: 'sarabun',
+          '&:hover': {
+            backgroundColor: '#000',
+          },
+        }}
+        >
           {visibleWidgets.layers ? "Hide Map Layers" : "Show Map Layers"}
         </MenuItem>
-        <MenuItem onClick={() => onWidgetToggle("legend", !visibleWidgets.legend)}>
+        <MenuItem 
+        onClick={() => onWidgetToggle("legend", !visibleWidgets.legend)}
+        sx={{
+          bgcolor: 'transparent',
+          color: '#fff',
+          fontFamily: 'sarabun',
+          '&:hover': {
+            backgroundColor: '#000',
+          },
+        }}
+        >
           {visibleWidgets.legend ? "Hide Legend" : "Show Legend"}
         </MenuItem>
       </Menu>
+      
     </div>
   );
 };

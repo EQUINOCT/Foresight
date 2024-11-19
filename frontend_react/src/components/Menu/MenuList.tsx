@@ -42,7 +42,7 @@ const MenuList: React.FC<MenuListProps> = ({activeControl, activeView, setActive
                 sx={{width: 25,height: 25}}
                 />
               </div>
-              <span className={` text-white font-inter bg-transparent ${ activeView.toLowerCase() === icon.string.toLowerCase() ? "font-semibold text-[11px]" : "text-3xs"}`}>
+              <span className={` text-white font-sarabun bg-transparent ${ activeView.toLowerCase() === icon.string.toLowerCase() ? "font-semibold text-[14px]" : "text-xs"}`}>
                   {icon.string}
               </span> 
             </Link>
