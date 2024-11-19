@@ -277,7 +277,7 @@ const CustomTooltip = ({ active, payload }: { active: boolean; payload: any}) =>
                         GROUNDWATER: false,
                         RIVER: false,
                         REGULATOR: false
-                      }}/>
+                      }} selected={[]}/>
                           </Card>
                         </Grid>
                        </Grid>

@@ -1,0 +1,17 @@
+{
+"type": "FeatureCollection",
+"name": "Tribel settlement",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "Id": 0, "NAME": "Vachumaram Kadar colony", "no_of_fami": "43", "male": "34", "female": "31", "children": "46", "total": "111", "land": null }, "geometry": { "type": "Point", "coordinates": [ 76.670826928719862, 10.283541987672663 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "NAME": "Vachumaram Malayar colony", "no_of_fami": "12", "male": "8", "female": "16", "children": "10", "total": "34", "land": null }, "geometry": { "type": "Point", "coordinates": [ 76.671333194871124, 10.2849819812335 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "NAME": "Thavalakuzhipara(malaya) colony", "no_of_fami": "46", "male": "62", "female": "74", "children": "58", "total": "194", "land": "14.16" }, "geometry": { "type": "Point", "coordinates": [ 76.691465198567698, 10.280304397177781 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "NAME": "Sholyar(kadar)tribal colony", "no_of_fami": "25", "male": "20", "female": "22", "children": "42", "total": "84", "land": "4.96" }, "geometry": { "type": "Point", "coordinates": [ 76.726636462097972, 10.303894308763173 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "NAME": "Pokalapara Colony", "no_of_fami": "30", "male": "24", "female": "32", "children": "25", "total": "81", "land": "5.13" }, "geometry": { "type": "Point", "coordinates": [ 76.612738427753754, 10.302097964627478 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "NAME": "Poringalkuthu Colony", "no_of_fami": "37", "male": "31", "female": "34", "children": "38", "total": "103", "land": "5.22" }, "geometry": { "type": "Point", "coordinates": [ 76.632449790817702, 10.315725497859807 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "NAME": "Mukkampuzha tribal colony", "no_of_fami": "20", "male": "17", "female": "19", "children": "22", "total": "58", "land": "2.7" }, "geometry": { "type": "Point", "coordinates": [ 76.657768906501531, 10.302733812962485 ] } },
+{ "type": "Feature", "properties": { "Id": 1, "NAME": "Vazhachal Colony", "no_of_fami": "75", "male": "98", "female": "104", "children": "40", "total": "242", "land": "3" }, "geometry": { "type": "Point", "coordinates": [ 76.591610838564947, 10.302625556614558 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "NAME": "Malakkappara(Kadar)tribal colony", "no_of_fami": "71", "male": "55", "female": "76", "children": "83", "total": "214", "land": "2" }, "geometry": { "type": "Point", "coordinates": [ 76.85032727806896, 10.281540728353555 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "NAME": "Ankayam(Kadar)", "no_of_fami": "26", "male": "22", "female": "30", "children": "25", "total": "77", "land": "2.53" }, "geometry": { "type": "Point", "coordinates": [ 76.676342222431558, 10.289263729466871 ] } }
+]
+}

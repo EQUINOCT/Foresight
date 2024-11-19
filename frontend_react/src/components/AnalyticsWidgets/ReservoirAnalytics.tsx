@@ -337,7 +337,7 @@ const ReservoirAnalytics: React.FC = () => {
                         GROUNDWATER: false,
                         RIVER: false,
                         REGULATOR: false
-                      }}/>
+                      }} selected = {[]}/>
                           </Card>
                         </Grid>
                        </Grid>

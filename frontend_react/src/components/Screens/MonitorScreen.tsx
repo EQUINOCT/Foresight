@@ -60,12 +60,18 @@ const MonitorScreen: React.FC<MonitorScreenProps> = ({onWidgetToggle, visibleWid
   return (
     <div className="monitor-screen w-full h-full relative flex flex-col rounded-[15px] overflow-hidden">
       <div className="absolute w-full h-full rounded-[15px] overflow-hidden">
-        <MonitoringMapComponent
-        selected = {selected}/>
+        <MonitoringMapComponent visibleGauges={{
+          PRECIPITATION: false,
+          RESERVOIR: false,
+          TIDAL: false,
+          GROUNDWATER: false,
+          RIVER: false,
+          REGULATOR: false
+        }} selected={selected}/>
       </div>
 
       {/* Widgets */}
-      <div className="absolute top-0 right-0 mt-[10px] mr-[20px] flex flex-col items-end">
+      <div className="absolute top-[75px] right-0 mt-[10px] mr-[20px] flex flex-col items-center justify-center">
         {visibleWidgets.layers && (
           <LayerComponent
             visibleGauges={visibleGauges}
@@ -86,14 +92,14 @@ const MonitorScreen: React.FC<MonitorScreenProps> = ({onWidgetToggle, visibleWid
       </div>
 
       {/* Alerts */}
-      <div style={{ position: "absolute", top: "30px", left: "20px" }}>
+      {/* <div style={{ position: "absolute", top: "30px", left: "20px" }}>
         {visibleWidgets.alerts && (
           <AlertWidgetComponent
             visibleAlerts={visibleWidgets.alerts}
             OnClose={() => onWidgetToggle('alerts', false)}
           />
         )}
-      </div>
+      </div> */}
     </div>
   );
 };

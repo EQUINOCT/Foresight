@@ -13,11 +13,12 @@ import { AddCircleOutlineSharp } from '@mui/icons-material';
 import { generateCustomMarker, incrementState } from '../Layers/misc';
 
 interface MonitoringMapComponentProps {
-  selected: string[];
+  visibleGauges: { PRECIPITATION: boolean; RESERVOIR: boolean; TIDAL: boolean; GROUNDWATER: boolean; RIVER: boolean; REGULATOR: boolean; };
+  forestLayers: { conflicts: boolean, buildings: boolean, settlements: boolean, water: boolean, roads: boolean, weather: boolean};
 }
 
 // maptilersdk.config.apiKey = configData.MAP_TILER_API_KEY;
-const MonitoringMapComponent: React.FC<MonitoringMapComponentProps> = React.memo(({selected}) => {
+const MonitoringMapComponent: React.FC<MonitoringMapComponentProps> = React.memo(({visibleGauges, forestLayers}) => {
   const { config } = useConfig();
   const [map, setMap] = useState<maplibregl.Map | null>(null);
   // const [layerVisible, setLayerVisible] = useState<boolean>(true);
@@ -54,30 +55,6 @@ const MonitoringMapComponent: React.FC<MonitoringMapComponentProps> = React.memo
       map.on('load', async function () {
         let layerId, targetLayerId;
 
-<<<<<<< Updated upstream
-        // Add Boundary layer sources to map
-        addBoundarySource(map, 'DISTRICT', config);
-        addBoundarySource(map, 'RIVER_BASIN', config);
-        addBoundarySource(map, 'PANCHAYAT', config);
-
-        // // Add Point layer sources to map
-        addPointSource(map, 'PRECIPITATION', config);
-        addPointSource(map, 'RESERVOIR', config);
-        addPointSource(map, 'RIVER', config);
-
-        
-
-        addPointLayer(map, 'PRECIPITATION', 'circle', config);
-        addPointLayer(map, 'RESERVOIR', 'circle', config);
-        addPointLayer(map, 'RIVER', 'circle', config);
-
-        // Add District Boundary layer to map
-        layerId = addBoundaryLayer(map, 'DISTRICT', null, config);
-        setMapState({boundaryLevel: 0});
-        console.log(mapState);
-        cursorToPointerOnHover(map, 'DISTRICT', layerId, config);
-        await handleClickOnLayer(map, setMapState, setCurrentFeatureLayerId, config);
-=======
         map.addSource('boundary-data', {type: 'geojson', data: config.LAYERS.BOUNDARY.URL});
         map.addLayer({
           id: 'boundary',
@@ -131,8 +108,6 @@ const MonitoringMapComponent: React.FC<MonitoringMapComponentProps> = React.memo
               'visibility': 'none'
           }
         }); 
->>>>>>> Stashed changes
-        
         
         setMap(map);
      
@@ -146,20 +121,20 @@ const MonitoringMapComponent: React.FC<MonitoringMapComponentProps> = React.memo
 
   useEffect(() => {
     if (map) {
-      console.log(selected);
+      console.log(forestLayers);
       // Iterate over the selected layers
-      selected.forEach((layerId: string) => {
-        // Check if the layer exists in the map
-        if (map.getLayer(layerId)) {
-          // If the layer is selected, set it to visible
-          map.setLayoutProperty(layerId, 'visibility', 'visible');
-        } else {
-          // If the layer is not selected, set it to none (invisible)
-          map.setLayoutProperty(layerId, 'visibility', 'none');
-        }
-      });
+      // selected.forEach((layerId: string) => {
+      //   // Check if the layer exists in the map
+      //   if (map.getLayer(layerId)) {
+      //     // If the layer is selected, set it to visible
+      //     map.setLayoutProperty(layerId, 'visibility', 'visible');
+      //   } else {
+      //     // If the layer is not selected, set it to none (invisible)
+      //     map.setLayoutProperty(layerId, 'visibility', 'none');
+      //   }
+      // });
     }
-  }, [selected, mapState]);
+  }, [forestLayers, mapState]);
 
 
   return (
