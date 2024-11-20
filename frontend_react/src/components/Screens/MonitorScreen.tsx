@@ -3,6 +3,7 @@ import AlertWidgetComponent from "../AlertWidget/AlertWidgetComponent";
 import LayerComponent from "../LayerWidget/LayersComponent";
 import Legend from "../LegendWidget/Legend";
 import { MonitoringMapComponent } from "../Maps/MonitoringMapComponent";
+import EQLogo from './Logo.png';
 
 // type GaugeType = "PRECIPITATION" | "RESERVOIR" | "TIDAL" | "GROUNDWATER" | "RIVER" | "REGULATOR";
 
@@ -14,6 +15,7 @@ interface GaugeType {
   RIVER: boolean;
   REGULATOR: boolean;
 }
+
 
 const initialVisibleGauges = {
   PRECIPITATION: false,
@@ -51,6 +53,11 @@ const MonitorScreen: React.FC<MonitorScreenProps> = ({onWidgetToggle, visibleWid
   //     [widget]: isVisible,
   //   }));
   // };
+  const logoStyle = {
+    width: '100px', // Set the width to 100px
+    height: '100px', // Set the height to 100px
+    objectFit: 'contain', // Maintain aspect ratio
+   };
 
 
 
@@ -78,7 +85,7 @@ const MonitorScreen: React.FC<MonitorScreenProps> = ({onWidgetToggle, visibleWid
       </div>
 
       {/* Widgets */}
-      <div className="absolute top-[75px] right-0 mt-[10px] mr-[20px] flex flex-col items-center justify-center">
+      <div className="absolute right-0 top-1/2 pb-5 transform -translate-y-1/2 mr-[20px] flex flex-col items-center">
         {visibleWidgets.layers && (
           <LayerComponent
             visibleGauges={visibleGauges}
@@ -98,7 +105,9 @@ const MonitorScreen: React.FC<MonitorScreenProps> = ({onWidgetToggle, visibleWid
           </div>
         )}
       </div>
-
+      <div className="absolute right-0 bottom-0 pr-[20px] pb-[5px]">
+        <img src={EQLogo} alt="Logo" className="logo" style={{ width: '100px', height: '100px', objectFit: 'contain' }} />
+      </div>
       {/* Alerts */}
       {/* <div style={{ position: "absolute", top: "30px", left: "20px" }}>
         {visibleWidgets.alerts && (

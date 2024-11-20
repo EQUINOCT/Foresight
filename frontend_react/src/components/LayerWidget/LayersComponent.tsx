@@ -14,6 +14,9 @@ import { GiElephant } from "react-icons/gi";
 import { FaRoad } from "react-icons/fa";
 import { Typography } from "@mui/material";
 import { Water } from "@mui/icons-material";
+import { Cloud } from "@mui/icons-material";
+import { FaHouseChimneyUser } from "react-icons/fa6";
+
 
 type GaugeType = "PRECIPITATION" | "RESERVOIR" | "TIDAL" | "GROUNDWATER" | "RIVER" | "REGULATOR";
 type label = "conflicts" | "buildings" | "settlements" | "water" | "roads" | "weather";
@@ -66,20 +69,20 @@ const LayersComponent: React.FC<LayersProps> = ({ visibleGauges, toggleGauge, on
   };
 
   const icons = [
-    { label: 'conflicts', icon: <GiElephant /> },
-    { label: 'buildings', icon: <LocationCity /> },
-    { label: 'settlements', icon: <LocationCity />},
-    { label: 'water', icon: <Water /> },
-    { label: 'roads', icon: <FaRoad /> },
-    { label: 'weather', icon: <Bolt />}
+    { label: 'Conflicts', icon: <GiElephant /> },
+    { label: 'Buildings', icon: <LocationCity /> },
+    { label: 'Settlements', icon: <FaHouseChimneyUser /> },
+    { label: 'Waterbodies', icon: <Water /> },
+    { label: 'Weather', icon: <Cloud /> },
+    { label: 'Roads', icon: <FaRoad /> },
   ];
   
   return (
     <Draggable>
-    <section className={`flex flex-col text-white font-inter rounded-3xl w-[90px] max-w-[90px] h-[415px] max-h-[415px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]`}>
+    <section className={`flex flex-col text-white font-sarabun rounded-3xl w-[90px] max-w-[90px] h-[415px] max-h-[415px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]`}>
       <div className={`flex flex-col pb-4 rounded-[18px] bg-opacity-90 bg-forest-400`}>
         {/* <header className={`flex flex-col pt-3.5 w-full ${isCollapsed ? "bg-transparent" : "rounded-[22px_22px_1px_1px] bg-zinc-800 bg-opacity-80 shadow-[0px_2px_5px_rgba(0,0,0,0.1)]"}`}> */}
-            <div className="pl-5 pt-5 pb-3 text-base font-semibold leading-none">
+            <div className="pl-5 pt-5 pb-3 text-base leading-none">
               Layers
             </div>
             <Stack direction="column" spacing={1} sx={{display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden'}}>
@@ -96,12 +99,12 @@ const LayersComponent: React.FC<LayersProps> = ({ visibleGauges, toggleGauge, on
                         backgroundColor: forestLayers[label as keyof typeof forestLayers] ? 'rgba(255, 255, 255, 0.8)' : 'rgba(0, 100, 0, 0.8)',
                       },
                       borderRadius: '50%',
-                      padding: '10px',
+                      padding: '8px',
                     }}
                   >
                     {React.cloneElement(icon, { fontSize: 'inherit' })}
                   </IconButton>
-                  <Typography sx={{ fontSize: '12px', color: '#fff' }}>{label}</Typography>
+                  <Typography sx={{ fontFamily: 'sarabun',fontSize: '12px', color: '#fff'}}>{label}</Typography>
                 </React.Fragment>
               ))}
             </Stack>
