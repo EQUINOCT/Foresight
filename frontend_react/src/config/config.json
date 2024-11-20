@@ -14,19 +14,31 @@
     },
     "LAYERS": {
         "BOUNDARY": {
-            "ID": "boundary",
+            "ID": ["boundary"],
             "URL": "https://api.maptiler.com/data/bcdaf47f-b208-4871-9769-31033242f312/features.json?key=rOzi4RnlGlqlLc5ozKz4"
         },
-        "WATER" : {
-            "ID" : "water",
-            "URL" : "https://api.maptiler.com/data/ba11d1e3-ed7b-40c9-bd41-a44dd918c0df/features.json?key=rOzi4RnlGlqlLc5ozKz4"
+        "CONFLICTS": {
+            "ID": ["conflicts"],
+            "URL": "https://api.maptiler.com/data/71b00f60-6d24-48c0-adfa-0fc4d8a68083/features.json?key=rOzi4RnlGlqlLc5ozKz4"
         },
-        "LOCATION" : {
-            "ID" : "location",
+        "BUILDINGS" : {
+            "ID" : ["location"],
             "URL" : "https://api.maptiler.com/data/b20998d5-607a-4ab4-a742-2178c26dd34f/features.json?key=rOzi4RnlGlqlLc5ozKz4"
         },
-        "ROAD" : {
-            "ID": "road",
+        "SETTLEMENTS" : {
+            "ID" : ["location"],
+            "URL" : "https://api.maptiler.com/data/b20998d5-607a-4ab4-a742-2178c26dd34f/features.json?key=rOzi4RnlGlqlLc5ozKz4"
+        },
+        "WATER" : {
+            "ID" : ["waterbody", "stream", "waterfall"],
+            "URL" : "https://api.maptiler.com/data/ba11d1e3-ed7b-40c9-bd41-a44dd918c0df/features.json?key=rOzi4RnlGlqlLc5ozKz4"
+        },
+        "ROADS" : {
+            "ID": ["road"],
+            "URL": "https://api.maptiler.com/data/c6d2609c-4828-44e2-8ff3-1f2776cfe9f8/features.json?key=rOzi4RnlGlqlLc5ozKz4"
+        },
+        "WEATHER" : {
+            "ID": ["weather"],
             "URL": "https://api.maptiler.com/data/c6d2609c-4828-44e2-8ff3-1f2776cfe9f8/features.json?key=rOzi4RnlGlqlLc5ozKz4"
         }
     }

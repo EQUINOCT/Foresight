@@ -57,7 +57,7 @@ const MonitoringMapComponent: React.FC<MonitoringMapComponentProps> = React.memo
 
         map.addSource('boundary-data', {type: 'geojson', data: config.LAYERS.BOUNDARY.URL});
         map.addLayer({
-          id: 'boundary',
+          id: 'division-area',
           type: 'fill',
           // If source is a full layer, it will have Source ID, 
           // else if generated, data passed directly.
@@ -66,14 +66,61 @@ const MonitoringMapComponent: React.FC<MonitoringMapComponentProps> = React.memo
           //     'visibility': 'visible'
           // }
           paint: {
-            'fill-color': 'yellow',
+            'fill-color': '#80AE4B',
             'fill-opacity': 0.3
           }
+        });
+        map.addLayer({
+          id: 'division-outline',
+          type: 'line',
+          // If source is a full layer, it will have Source ID, 
+          // else if generated, data passed directly.
+          source: 'boundary-data',
+          // layout: {
+          //     'visibility': 'visible'
+          // }
+          paint: {
+            'line-width': 3,
+            'line-color': '#80AE4B',
+            'line-opacity': 0.5
+          }
+        }); 
+        const image = await map.loadImage('assets/icons/conflict.png');
+        map.addImage('cat', image.data);
+
+        map.addSource('conflicts-data', {type: 'geojson', data: config.LAYERS.CONFLICTS.URL});
+        map.addLayer({
+          id: 'conflicts',
+          type: 'symbol',
+          // If source is a full layer, it will have Source ID, 
+          // else if generated, data passed directly.
+          source: 'conflicts-data',
+          layout: {
+              'icon-image': 'cat',
+              'icon-size': 0.1,
+              'visibility': 'none'
+          },
+          filter: ['==', '$type', 'Point']
         }); 
        
         map.addSource('water-data', {type: 'geojson', data: config.LAYERS.WATER.URL});
         map.addLayer({
-          id: 'water',
+          id: 'waterbody',
+          type: 'fill',
+          // If source is a full layer, it will have Source ID, 
+          // else if generated, data passed directly.
+          source: 'water-data',
+          paint: {
+              'fill-color': 'blue',
+              // 'fill-opacity': 1
+          },
+          layout: {
+              'visibility': 'none'
+          },
+          filter: ['==', '$type', 'Polygon']
+        }); 
+        map.addLayer({
+          id: 'stream',
           type: 'line',
           // If source is a full layer, it will have Source ID, 
           // else if generated, data passed directly.
@@ -84,20 +131,37 @@ const MonitoringMapComponent: React.FC<MonitoringMapComponentProps> = React.memo
           },
           layout: {
               'visibility': 'none'
-          }
+          },
+          filter: ['==', '$type', 'LineString']
         }); 
-        map.addSource('location-data', {type: 'geojson', data: config.LAYERS.LOCATION.URL});
+        map.addLayer({
+          id: 'waterfall',
+          type: 'circle',
+          // If source is a full layer, it will have Source ID, 
+          // else if generated, data passed directly.
+          source: 'water-data',
+          // paint: {
+          //     'line-color': 'blue',
+          //     // 'fill-opacity': 1
+          // },
+          layout: {
+              'visibility': 'none'
+          },
+          filter: ['==', '$type', 'Point']
+        }); 
+
+        map.addSource('building-data', {type: 'geojson', data: config.LAYERS.BUILDINGS.URL});
         map.addLayer({
           id: 'location',
           type: 'circle',
           // If source is a full layer, it will have Source ID, 
           // else if generated, data passed directly.
-          source: 'location-data',
+          source: 'building-data',
           layout: {
               'visibility': 'none'
           }
         }); 
-        map.addSource('road-data', {type: 'geojson', data: config.LAYERS.ROAD.URL});
+        map.addSource('road-data', {type: 'geojson', data: config.LAYERS.ROADS.URL});
         map.addLayer({
           id: 'road',
           type: 'line',
@@ -121,16 +185,17 @@ const MonitoringMapComponent: React.FC<MonitoringMapComponentProps> = React.memo
 
   useEffect(() => {
     if (map) {
-      console.log(forestLayers);
       // Iterate over the keys of the forestLayers object
-      Object.keys(forestLayers).forEach((layerId) => {
+      Object.keys(forestLayers).forEach((category) => {
         // Check if the layer exists in the map
-        if (map.getLayer(layerId)) {
-          console.log(layerId);
-          // If the layer is selected (true), set it to visible
-          const visibility = forestLayers[layerId as keyof typeof forestLayers] ? 'visible' : 'none';
-          map.setLayoutProperty(layerId, 'visibility', visibility);
-        }
+        const visibility = forestLayers[category as keyof typeof forestLayers] ? 'visible' : 'none';
+        const layerIds = config.LAYERS[category.toUpperCase()].ID;
+        layerIds.forEach((layerId: string) => {
+          if (map.getLayer(layerId)) {
+            // If the layer is selected (true), set it to visible
+            map.setLayoutProperty(layerId, 'visibility', visibility);
+          }
+        });
       });
     }
   }, [forestLayers, map]); // Ensure map is also included in the dependency array
