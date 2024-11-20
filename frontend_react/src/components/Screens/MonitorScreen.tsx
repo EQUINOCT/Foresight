@@ -24,6 +24,15 @@ const initialVisibleGauges = {
   REGULATOR : false,
 };
 
+const initialForestLayers = {
+  conflicts: false,
+  buildings: false,
+  settlements: false,
+  water: false,
+  roads: false,
+  weather: false
+}
+
 interface MonitorScreenProps {
   visibleWidgets: {alerts: boolean, layers: boolean, legend: boolean};
   onWidgetToggle: (widget: "alerts" | "layers" | "legend", isVisible: boolean) => void;
@@ -43,13 +52,10 @@ const MonitorScreen: React.FC<MonitorScreenProps> = ({onWidgetToggle, visibleWid
   //   }));
   // };
 
-  const [selected, setSelected] = useState<string[]>([]);
 
+
+  const [forestLayers, setForestLayers] = useState(initialForestLayers);
   const [visibleGauges, setVisibleGauges] = useState(initialVisibleGauges);
-
-  // const [visibleAlerts, setVisibleAlerts] = useState(true);
-  // const [visibleLayers, setVisibleLayers] = useState(true);
-  // const [visibleLegend, setVisibleLegend] = useState(true);
 
   function toggleGauge(gaugeType: keyof GaugeType) {
     setVisibleGauges({ ...visibleGauges, [gaugeType]: !visibleGauges[gaugeType] });
@@ -67,7 +73,8 @@ const MonitorScreen: React.FC<MonitorScreenProps> = ({onWidgetToggle, visibleWid
           GROUNDWATER: false,
           RIVER: false,
           REGULATOR: false
-        }} selected={selected}/>
+        }} forestLayers={forestLayers}/>
+  
       </div>
 
       {/* Widgets */}
@@ -76,7 +83,8 @@ const MonitorScreen: React.FC<MonitorScreenProps> = ({onWidgetToggle, visibleWid
           <LayerComponent
             visibleGauges={visibleGauges}
             toggleGauge={toggleGauge}
-            
+            forestLayers={forestLayers}
+            setForestLayers={setForestLayers}
             onClose={() => onWidgetToggle('layers', false)}
           />
         )}

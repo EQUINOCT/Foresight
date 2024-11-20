@@ -242,7 +242,13 @@ const RiverWidgets: React.FC = () => {
                 GROUNDWATER: false,
                 RIVER: false,
                 REGULATOR: false
-              }} selected = {[]} />
+              }} forestLayers={{ 
+                conflicts: false, 
+                buildings: false, 
+                settlements: false, 
+                water: true, 
+                roads: false, 
+                weather: false}} />
             </Card>
           </Grid>
           <Grid size={{xs:12}} sx={{ height: '10%' }}>

@@ -16,7 +16,7 @@ import { Typography } from "@mui/material";
 import { Water } from "@mui/icons-material";
 
 type GaugeType = "PRECIPITATION" | "RESERVOIR" | "TIDAL" | "GROUNDWATER" | "RIVER" | "REGULATOR";
-
+type label = "conflicts" | "buildings" | "settlements" | "water" | "roads" | "weather";
 interface LayersProps {
   visibleGauges: {
     PRECIPITATION: boolean;
@@ -28,28 +28,50 @@ interface LayersProps {
   };
   toggleGauge: (gauge: GaugeType) => void;
   onClose: () => void;
+  forestLayers: {
+    conflicts: boolean;
+    buildings: boolean;
+    settlements: boolean;
+    water: boolean;
+    roads: boolean;
+    weather: boolean;
+  }
+  setForestLayers: React.Dispatch<React.SetStateAction<{
+    conflicts: boolean;
+    buildings: boolean;
+    settlements: boolean;
+    water: boolean;
+    roads: boolean;
+    weather: boolean;
+  }>>;
 }
 
-const LayersComponent: React.FC<LayersProps> = ({ visibleGauges, toggleGauge, onClose }) => {
+const LayersComponent: React.FC<LayersProps> = ({ visibleGauges, toggleGauge, onClose, forestLayers, setForestLayers}) => {
   // const [activeTab, setActiveTab] = useState<"Manual" | "Real Time">("Manual");
   // const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
 
-  const [selected, setSelected] = useState<string[]>([]);
+  // const handleSelect = (label: string) => {
+  //   setForestLayers((prev) =>
+  //     prev.includes(label)
+  //       ? prev.filter((item) => item !== label) // Remove if already selected
+  //       : [...prev, label] // Add if not selected
+  //   );
+  // };
 
-  const handleSelect = (label: string) => {
-    setSelected((prev) =>
-      prev.includes(label)
-        ? prev.filter((item) => item !== label) // Remove if already selected
-        : [...prev, label] // Add if not selected
-    );
+  const handleSelect = (label: keyof typeof forestLayers) => {
+  setForestLayers((prev) => ({
+    ...prev,
+    [label]: !prev[label], // Toggle the boolean value for the selected layer
+  }));
   };
 
   const icons = [
-    { label: 'Conflicts', icon: <GiElephant /> },
-    { label: 'Headquarters', icon: <LocationCity /> },
-    { label: 'Streams', icon: <Water /> },
-    { label: 'Powerhouse', icon: <Bolt /> },
-    { label: 'State Highway', icon: <FaRoad /> },
+    { label: 'conflicts', icon: <GiElephant /> },
+    { label: 'buildings', icon: <LocationCity /> },
+    { label: 'settlements', icon: <LocationCity />},
+    { label: 'water', icon: <Water /> },
+    { label: 'roads', icon: <FaRoad /> },
+    { label: 'weather', icon: <Bolt />}
   ];
   
   return (
@@ -66,12 +88,12 @@ const LayersComponent: React.FC<LayersProps> = ({ visibleGauges, toggleGauge, on
                   <IconButton
                     aria-label={label.toLowerCase()}
                     size="large"
-                    onClick={() => handleSelect(label)}
+                    onClick={() => handleSelect(label as keyof typeof forestLayers)} // Ensure label is a key of forestLayers
                     sx={{
-                      backgroundColor: selected.includes(label) ? 'white' : '#AED697',
+                      backgroundColor: forestLayers[label as keyof typeof forestLayers] ? 'white' : '#AED697', // Check the boolean value
                       color: '#016D46',
                       '&:hover': {
-                        backgroundColor: selected.includes(label) ? 'rgba(255, 255, 255, 0.8)' : 'rgba(0, 100, 0, 0.8)',
+                        backgroundColor: forestLayers[label as keyof typeof forestLayers] ? 'rgba(255, 255, 255, 0.8)' : 'rgba(0, 100, 0, 0.8)',
                       },
                       borderRadius: '50%',
                       padding: '10px',
@@ -83,133 +105,6 @@ const LayersComponent: React.FC<LayersProps> = ({ visibleGauges, toggleGauge, on
                 </React.Fragment>
               ))}
             </Stack>
-          {/* {!isCollapsed && (
-            <nav className="relative flex pl-4 mt-2 mb-1 text-xs leading-loose text-center justify-start">
-              <button className={`font-inter bg-transparent ${activeTab === "Manual" ? "text-white" : "text-silver-100"}`}
-                onClick={() => setActiveTab("Manual")}
-              >
-                Manual
-              </button>
-              <button className={`font-inter bg-transparent ${activeTab === "Real Time" ? "text-white" : "text-silver-100"}`}
-                onClick={() => setActiveTab("Real Time")}
-              >
-                Real time
-              </button>
-              <div
-                className={`absolute h-0.5 bg-stone-300 rounded-[100px_100px_0px_0px] transition-all duration-300 ease-in-out ${activeTab === "Manual" ? "left-[22px] w-[46px]" : "left-[79px] w-[60px]"}`}
-                style={{ bottom: "-4px" }}
-              />
-            </nav>
-          )} */}
-        {/* </header> */}
-        {/* {!isCollapsed && (
-          <>
-            <div className="flex flex-col px-5 gap-1 items-start mt-2 text-xs">
-              <div className="flex items-center">
-                <Checkbox
-                 checked={visibleGauges.PRECIPITATION}
-                 onChange={() => toggleGauge("PRECIPITATION")}
-                 icon={<CheckBoxOutlineBlankIcon  sx={{ color: "#9f9c9c", width: 14, height: 14}}/>}
-                 checkedIcon={<Checkicon sx={{color: "#9f9c9c", width: 14, height: 14}}/>}
-                 sx={{
-                  color: "#9f9c9c",
-                  width: 14,
-                  height: 14,
-                  '&.Mui-checked': {
-                    color: "#9f9c9c",
-                  },
-                 }}
-                />
-                <label>Rainfall gauges</label>
-              </div>
-              <div className="flex items-center">
-                <Checkbox
-                  checked={visibleGauges.RESERVOIR}
-                  onChange={() => toggleGauge("RESERVOIR")}
-                  icon={<CheckBoxOutlineBlankIcon sx={{ color: "#9f9c9c",width: 14, height: 14 }} />}
-                  checkedIcon={<Checkicon sx={{ color: "#9f9c9c", width: 14, height: 14 }} />}
-                  sx={{
-                    color: "#9f9c9c",
-                    width: 14,
-                    height: 14,
-                    '&.Mui-checked': {
-                      color: "#9f9c9c",
-                    },
-                  }}
-                />
-                <label>Reservoir/Dam level</label>
-              </div>
-              <div className="flex items-center">
-                <Checkbox
-                  checked={visibleGauges.TIDAL}
-                  onChange={() => toggleGauge("TIDAL")}
-                  icon={<CheckBoxOutlineBlankIcon sx={{ color: "#9f9c9c", width: 14, height:14 }} />}
-                  checkedIcon={<Checkicon sx={{ color: "#9f9c9c", width: 14, height: 14 }} />}
-                  sx={{
-                    color: "#9f9c9c",
-                    width: 14,
-                    height: 14,
-                    '&.Mui-checked': {
-                      color: "#9f9c9c",
-                    },
-                  }}
-                />
-                <label>Tidal level</label>
-              </div>
-              <div className="flex items-center">
-                <Checkbox
-                  checked={visibleGauges.GROUNDWATER}
-                  onChange={() => toggleGauge("GROUNDWATER")}
-                  icon={<CheckBoxOutlineBlankIcon sx={{ color: "#9f9c9c", width: 14, height:14 }} />}
-                  checkedIcon={<Checkicon sx={{ color: "#9f9c9c", width: 14, height:14  }} />}
-                  sx={{
-                    color: "#9f9c9c",
-                    width: 14,
-                    height: 14,
-                    '&.Mui-checked': {
-                      color: "#9f9c9c",
-                    },
-                  }}
-                />
-                <label>Groundwater level</label>
-              </div>
-              <div className="flex items-center">
-                <Checkbox
-                  checked={visibleGauges.RIVER}
-                  onChange={() => toggleGauge("RIVER")}
-                  icon={<CheckBoxOutlineBlankIcon sx={{ color: "#9f9c9c", width: 14, height:14 }} />}
-                  checkedIcon={<Checkicon sx={{ color: "#9f9c9c", width: 14, height:14  }} />}
-                  sx={{
-                    color: "#9f9c9c",
-                    width: 14,
-                    height: 14,
-                    '&.Mui-checked': {
-                      color: "#9f9c9c",
-                    },
-                  }}
-                />
-                <label>River water level</label>
-              </div>
-              <div className="flex items-center">
-                <Checkbox
-                  checked={visibleGauges.REGULATOR}
-                  onChange={() => toggleGauge("REGULATOR")}
-                  icon={<CheckBoxOutlineBlankIcon sx={{ color: "#9f9c9c" , width: 14, height:14 }} />}
-                  checkedIcon={<Checkicon sx={{ color: "#9f9c9c", width: 14, height:14  }} />}
-                  sx={{
-                    color: "#9f9c9c",
-                    width: 14,
-                    height: 14,
-                    '&.Mui-checked': {
-                      color: "#9f9c9c",
-                    },
-                  }}
-                />
-                <label>Regulators</label>
-              </div>
-            </div>
-          </>
-        )} */}
       </div>
     </section>
   </Draggable>

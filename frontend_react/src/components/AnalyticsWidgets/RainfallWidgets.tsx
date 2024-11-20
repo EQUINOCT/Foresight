@@ -277,7 +277,13 @@ const CustomTooltip = ({ active, payload }: { active: boolean; payload: any}) =>
                         GROUNDWATER: false,
                         RIVER: false,
                         REGULATOR: false
-                      }} selected={[]}/>
+                      }} forestLayers={{ 
+                        conflicts: false, 
+                        buildings: false, 
+                        settlements: false, 
+                        water: true, 
+                        roads: false, 
+                        weather: false}}/>
                           </Card>
                         </Grid>
                        </Grid>

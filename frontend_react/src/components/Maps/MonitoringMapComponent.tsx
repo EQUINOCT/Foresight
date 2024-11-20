@@ -122,19 +122,18 @@ const MonitoringMapComponent: React.FC<MonitoringMapComponentProps> = React.memo
   useEffect(() => {
     if (map) {
       console.log(forestLayers);
-      // Iterate over the selected layers
-      // selected.forEach((layerId: string) => {
-      //   // Check if the layer exists in the map
-      //   if (map.getLayer(layerId)) {
-      //     // If the layer is selected, set it to visible
-      //     map.setLayoutProperty(layerId, 'visibility', 'visible');
-      //   } else {
-      //     // If the layer is not selected, set it to none (invisible)
-      //     map.setLayoutProperty(layerId, 'visibility', 'none');
-      //   }
-      // });
+      // Iterate over the keys of the forestLayers object
+      Object.keys(forestLayers).forEach((layerId) => {
+        // Check if the layer exists in the map
+        if (map.getLayer(layerId)) {
+          console.log(layerId);
+          // If the layer is selected (true), set it to visible
+          const visibility = forestLayers[layerId as keyof typeof forestLayers] ? 'visible' : 'none';
+          map.setLayoutProperty(layerId, 'visibility', visibility);
+        }
+      });
     }
-  }, [forestLayers, mapState]);
+  }, [forestLayers, map]); // Ensure map is also included in the dependency array
 
 
   return (
