@@ -3,6 +3,9 @@ import WidgetSelector from "./WidgetSelector";
 import LocationSelector from "./LocationSelector";
 import Person from "@mui/icons-material/Person";
 import { Link } from "react-router-dom";
+import { IconButton, InputBase, Paper, Typography } from "@mui/material";
+import { Notifications } from "@mui/icons-material";
+import SearchIcon from '@mui/icons-material/Search';
 
 interface NavigationBarProps {
   activeControl: string;
@@ -27,7 +30,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
   //const [activeControl, setActiveControl] = useState('monitor');
 
   return (
-    <header className="flex items-center justify-between bg-zinc-900 bg-opacity-95 py-2 w-full ">
+    <header className="flex items-center justify-between bg-zinc-900 bg-opacity-90 bg-blend-overlay py-1.5 w-full ">
 
       {/* <nav className="flex justify-center">
         <ul className="flex gap-7 pl-[250px] items-center mt-2.5 list-none p-0 mb-2">
@@ -48,37 +51,72 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
           ))}
         </ul>
       </nav> */}
-
-      <div className="text-forest-100 text-[40px] pl-[10px] font-inter"> 
-        Foresight
-      </div>
-          
-      <div className="flex gap-2 pr-[10px] items-center justify-end">
-        <div className="widget-selector-container" style={{ width: 100 }}>
-          {activeControl.toLowerCase() === "monitor" && activeView.toLowerCase() === "visualization" && (
-              <WidgetSelector 
-                onWidgetToggle={onWidgetToggle}
-                visibleWidgets={visibleWidgets}
-              />
-          )}
+      <div className="flex gap-2 pl-[15px] items-center justify-start">
+        <div className="text-forest-100 text-[40px] font-sarabun"> 
+          Foresight
         </div>
+        <Typography sx={{ fontFamily: 'sarabun', color: '#fff', pt: '5px', opacity: '90%'}}> Vazhachal FDA</Typography>
+      </div>
+
+      <div className="flex gap-2 pr-[15px] items-center justify-end">
+      <Paper
+        component="form"
+        sx={{ 
+          p: '2px 1px', 
+          display: 'flex', 
+          alignItems: 'center', 
+          width: 150, 
+          bgcolor: '#18181b',
+          borderRadius: '20px',
+          border: '0.5px solid rgba(174, 214, 151, 0.5)'
+        }}
+      >
+          <InputBase
+            sx={{ ml: 1, flex: 1, color: '#fff', fontFamily: 'sarabun', pl:'10px', opacity: '50%' }}
+            placeholder="Search.."
+            inputProps={{ 'aria-label': 'search' }}
+          />
+          <IconButton type="button" sx={{ p: '4.4px', pr: '10px', color: '#fff' }} aria-label="search">
+            <SearchIcon />
+          </IconButton>
+      </Paper>
+        {activeControl.toLowerCase() === "monitor" && activeView.toLowerCase() === "visualization" && (
+            <WidgetSelector 
+              onWidgetToggle={onWidgetToggle}
+              visibleWidgets={visibleWidgets}
+            />
+        )}
         {/* <LocationSelector /> */}
-        <div
-          style={{
+        <IconButton
+          aria-label={'user'}
+          // size="large"
+          sx={{
             width: '35px',
             height: '35px',
-            backgroundColor: 'rgba(39, 39, 42, 1))',  // Black with 81% opacity
+            backgroundColor: '#18181b',
+            border: '0.5px solid rgba(174, 214, 151, 0.5)',
+            color: '#AED697',
             borderRadius: '50%',
-            backgroundImage: 'url("/broken-image.jpg")',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
+            padding: '10px',
           }}
         >
-          <Person sx={{color: '#fff'}}/>
-        </div>
+         <Notifications sx={{color: '#fff', height: '25px'}}/>
+        </IconButton>
+        <IconButton
+          aria-label={'user'}
+          // size="large"
+          sx={{
+            width: '35px',
+            height: '35px',
+            backgroundColor: '#18181b',
+            border: '0.5px solid rgba(174, 214, 151, 0.5)',
+            color: '#AED697',
+            borderRadius: '50%',
+            padding: '10px',
+          }}
+        >
+         <Person sx={{color: '#fff'}}/>
+        </IconButton>
 
       </div>
     </header>
