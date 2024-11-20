@@ -30,7 +30,7 @@ const initialForestLayers = {
   conflicts: false,
   buildings: false,
   settlements: false,
-  water: false,
+  waterbodies: false,
   roads: false,
   weather: false
 }

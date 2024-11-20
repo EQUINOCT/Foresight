@@ -281,7 +281,7 @@ const CustomTooltip = ({ active, payload }: { active: boolean; payload: any}) =>
                         conflicts: false, 
                         buildings: false, 
                         settlements: false, 
-                        water: true, 
+                        waterbodies: true, 
                         roads: false, 
                         weather: false}}/>
                           </Card>

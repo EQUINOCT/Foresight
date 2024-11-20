@@ -246,7 +246,7 @@ const RiverWidgets: React.FC = () => {
                 conflicts: false, 
                 buildings: false, 
                 settlements: false, 
-                water: true, 
+                waterbodies: true, 
                 roads: false, 
                 weather: false}} />
             </Card>

@@ -22,16 +22,16 @@
             "URL": "https://api.maptiler.com/data/71b00f60-6d24-48c0-adfa-0fc4d8a68083/features.json?key=rOzi4RnlGlqlLc5ozKz4"
         },
         "BUILDINGS" : {
-            "ID" : ["location"],
-            "URL" : "https://api.maptiler.com/data/b20998d5-607a-4ab4-a742-2178c26dd34f/features.json?key=rOzi4RnlGlqlLc5ozKz4"
+            "ID" : ["hq", "campshed", "power"],
+            "URL" : "https://api.maptiler.com/data/49453ebd-0c7e-4a96-9f11-ba09eb0d8ffc/features.json?key=rOzi4RnlGlqlLc5ozKz4"
         },
         "SETTLEMENTS" : {
-            "ID" : ["location"],
-            "URL" : "https://api.maptiler.com/data/b20998d5-607a-4ab4-a742-2178c26dd34f/features.json?key=rOzi4RnlGlqlLc5ozKz4"
+            "ID" : ["settlements"],
+            "URL" : "https://api.maptiler.com/data/76e55808-30f8-42fb-aa53-b04937b2b5b7/features.json?key=rOzi4RnlGlqlLc5ozKz4"
         },
-        "WATER" : {
-            "ID" : ["waterbody", "stream", "waterfall"],
-            "URL" : "https://api.maptiler.com/data/ba11d1e3-ed7b-40c9-bd41-a44dd918c0df/features.json?key=rOzi4RnlGlqlLc5ozKz4"
+        "WATERBODIES" : {
+            "ID" : ["waterbody", "stream", "waterfall", "pond"],
+            "URL" : "https://api.maptiler.com/data/7988a5e4-6b3d-4784-9162-7826008cd814/features.json?key=rOzi4RnlGlqlLc5ozKz4"
         },
         "ROADS" : {
             "ID": ["road"],

@@ -19,7 +19,7 @@ import { FaHouseChimneyUser } from "react-icons/fa6";
 
 
 type GaugeType = "PRECIPITATION" | "RESERVOIR" | "TIDAL" | "GROUNDWATER" | "RIVER" | "REGULATOR";
-type label = "conflicts" | "buildings" | "settlements" | "water" | "roads" | "weather";
+type label = "conflicts" | "buildings" | "settlements" | "waterbodies" | "roads" | "weather";
 interface LayersProps {
   visibleGauges: {
     PRECIPITATION: boolean;
@@ -35,7 +35,7 @@ interface LayersProps {
     conflicts: boolean;
     buildings: boolean;
     settlements: boolean;
-    water: boolean;
+    waterbodies: boolean;
     roads: boolean;
     weather: boolean;
   }
@@ -43,7 +43,7 @@ interface LayersProps {
     conflicts: boolean;
     buildings: boolean;
     settlements: boolean;
-    water: boolean;
+    waterbodies: boolean;
     roads: boolean;
     weather: boolean;
   }>>;

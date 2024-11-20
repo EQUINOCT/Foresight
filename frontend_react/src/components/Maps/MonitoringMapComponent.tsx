@@ -14,7 +14,7 @@ import { generateCustomMarker, incrementState } from '../Layers/misc';
 
 interface MonitoringMapComponentProps {
   visibleGauges: { PRECIPITATION: boolean; RESERVOIR: boolean; TIDAL: boolean; GROUNDWATER: boolean; RIVER: boolean; REGULATOR: boolean; };
-  forestLayers: { conflicts: boolean, buildings: boolean, settlements: boolean, water: boolean, roads: boolean, weather: boolean};
+  forestLayers: { conflicts: boolean, buildings: boolean, settlements: boolean, waterbodies: boolean, roads: boolean, weather: boolean};
 }
 
 // maptilersdk.config.apiKey = configData.MAP_TILER_API_KEY;
@@ -86,7 +86,7 @@ const MonitoringMapComponent: React.FC<MonitoringMapComponentProps> = React.memo
           }
         }); 
         const image = await map.loadImage('assets/icons/conflict.png');
-        map.addImage('cat', image.data);
+        map.addImage('conflict', image.data);
 
         map.addSource('conflicts-data', {type: 'geojson', data: config.LAYERS.CONFLICTS.URL});
         map.addLayer({
@@ -96,14 +96,19 @@ const MonitoringMapComponent: React.FC<MonitoringMapComponentProps> = React.memo
           // else if generated, data passed directly.
           source: 'conflicts-data',
           layout: {
-              'icon-image': 'cat',
+              'icon-image': 'conflict',
               'icon-size': 0.1,
               'visibility': 'none'
           },
           filter: ['==', '$type', 'Point']
         }); 
+
+        const waterfallImg = await map.loadImage('assets/icons/waterfall.png');
+        map.addImage('waterfall-img', waterfallImg.data);
+        const pondImg = await map.loadImage('assets/icons/pond.png');
+        map.addImage('pond-img', pondImg.data);
        
-        map.addSource('water-data', {type: 'geojson', data: config.LAYERS.WATER.URL});
+        map.addSource('water-data', {type: 'geojson', data: config.LAYERS.WATERBODIES.URL});
         map.addLayer({
           id: 'waterbody',
           type: 'fill',
@@ -134,33 +139,85 @@ const MonitoringMapComponent: React.FC<MonitoringMapComponentProps> = React.memo
           },
           filter: ['==', '$type', 'LineString']
         }); 
+
+
         map.addLayer({
           id: 'waterfall',
-          type: 'circle',
+          type: 'symbol',
           // If source is a full layer, it will have Source ID, 
           // else if generated, data passed directly.
           source: 'water-data',
-          // paint: {
-          //     'line-color': 'blue',
-          //     // 'fill-opacity': 1
-          // },
           layout: {
+              'icon-image': 'waterfall-img',
+              'icon-size': 0.1,
               'visibility': 'none'
           },
-          filter: ['==', '$type', 'Point']
+          filter: ['==', 'category', 'waterfall']
         }); 
+        map.addLayer({
+          id: 'pond',
+          type: 'symbol',
+          // If source is a full layer, it will have Source ID, 
+          // else if generated, data passed directly.
+          source: 'water-data',
+          layout: {
+              'icon-image': 'pond-img',
+              'icon-size': 0.1,
+              'visibility': 'none'
+          },
+          filter: ['==', 'category', 'pond']
+        }); 
+
+        const hqImg = await map.loadImage('assets/icons/hq.png');
+        map.addImage('hq-img', hqImg.data);
+        const campImg = await map.loadImage('assets/icons/camp.png');
+        map.addImage('camp-img', campImg.data)
 
         map.addSource('building-data', {type: 'geojson', data: config.LAYERS.BUILDINGS.URL});
         map.addLayer({
-          id: 'location',
-          type: 'circle',
+          id: 'hq',
+          type: 'symbol',
           // If source is a full layer, it will have Source ID, 
           // else if generated, data passed directly.
           source: 'building-data',
           layout: {
+              'icon-image': 'hq-img',
+              'icon-size': 0.1,
               'visibility': 'none'
-          }
+          },
+          filter: ['==', 'Category', 'HQ']
         }); 
+        map.addLayer({
+          id: 'campshed',
+          type: 'symbol',
+          // If source is a full layer, it will have Source ID, 
+          // else if generated, data passed directly.
+          source: 'building-data',
+          layout: {
+              'icon-image': 'camp-img',
+              'icon-size': 0.1,
+              'visibility': 'none'
+          },
+          filter: ['==', 'Category', 'Campshed']
+        }); 
+
+        const settlementImg = await map.loadImage('assets/icons/settlement.png');
+        map.addImage('settlement-img', settlementImg.data);
+        map.addSource('tribal-data', {type: 'geojson', data: config.LAYERS.SETTLEMENTS.URL});
+        map.addLayer({
+          id: 'settlements',
+          type: 'symbol',
+          // If source is a full layer, it will have Source ID, 
+          // else if generated, data passed directly.
+          source: 'tribal-data',
+          layout: {
+              'icon-image': 'settlement-img',
+              'icon-size': 0.1,
+              'visibility': 'none'
+          },
+        }); 
+
+        // map.setFilter('hq', ['==', 'category', 'HQ']);
         map.addSource('road-data', {type: 'geojson', data: config.LAYERS.ROADS.URL});
         map.addLayer({
           id: 'road',
@@ -168,6 +225,9 @@ const MonitoringMapComponent: React.FC<MonitoringMapComponentProps> = React.memo
           // If source is a full layer, it will have Source ID, 
           // else if generated, data passed directly.
           source: 'road-data',
+          paint: {
+            'line-width': 4,
+          },
           layout: {
               'visibility': 'none'
           }
