@@ -1,0 +1,18 @@
+{
+"type": "FeatureCollection",
+"name": "Campsheds_out",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "Id": 0, "Range": "Sholayar", "Division": "Vazhachal", "Station": "Sholayar FS", "Circle": "Central circle", "Name": "swapnamudi", "Category": "Campshed" }, "geometry": { "type": "Point", "coordinates": [ 76.807888888888897, 10.301694444444443 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Range": "Athirapilly", "Division": "Vazhachal", "Station": "Athirapilly FS", "Circle": "Central circle", "Name": "Oolassery", "Category": "Campshed" }, "geometry": { "type": "Point", "coordinates": [ 76.57577499206846, 10.286422247999717 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Range": "Athirapilly", "Division": "Vazhachal", "Station": "Athirapilly FS", "Circle": "Central circle", "Name": "Ooru", "Category": "Campshed" }, "geometry": { "type": "Point", "coordinates": [ 76.597083332738578, 10.274527781347011 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Range": "Vazhachal", "Division": "Vazhachal", "Station": "Mukkampuzha FS", "Circle": "Central circle", "Name": "Paradi", "Category": "Campshed" }, "geometry": { "type": "Point", "coordinates": [ 76.663489997025678, 10.313369999405134 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Range": "Sholayar", "Division": "Vazhachal", "Station": "Malakkapara FS", "Circle": "Central circle", "Name": "Mechappilly", "Category": "Campshed" }, "geometry": { "type": "Point", "coordinates": [ 76.719008912882728, 10.275257422209437 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Range": "Charpa", "Division": "Vazhachal", "Station": "Kannakuzhy FS", "Circle": "Central circle", "Name": "Kundoormedu", "Category": "Campshed" }, "geometry": { "type": "Point", "coordinates": [ 76.555936640847634, 10.335057888540932 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Range": "Charpa", "Division": "Vazhachal", "Station": "Kannankuzhy FS", "Circle": "Central circle", "Name": "Karamthode", "Category": "Campshed" }, "geometry": { "type": "Point", "coordinates": [ 76.630988557279039, 10.352152805673846 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Range": "Vazhachal", "Division": "Vazhachal", "Station": "Mukkampuzha FS", "Circle": "Central Circle", "Name": "Adhivattarom", "Category": "Campshed" }, "geometry": { "type": "Point", "coordinates": [ 76.638416669640989, 10.346555558529882 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Range": "Kollathirumedu", "Division": "Vazhachal", "Station": "Kollathirumedu", "Circle": "Central circle", "Name": "Repra", "Category": "Campshed" }, "geometry": { "type": "Point", "coordinates": [ 76.643249996430825, 10.257100003569191 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Range": null, "Division": "Vazhachal", "Station": null, "Circle": null, "Name": "Thottapura", "Category": "Campshed" }, "geometry": { "type": "Point", "coordinates": [ 76.760189249240455, 10.306279211667681 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Range": null, "Division": null, "Station": null, "Circle": null, "Name": "Pachilavalam", "Category": "Campshed" }, "geometry": { "type": "Point", "coordinates": [ 76.628969949220689, 10.283724735601229 ] } }
+]
+}
