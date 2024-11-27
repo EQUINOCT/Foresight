@@ -108,7 +108,7 @@ const MonitoringMapComponent: React.FC<MonitoringMapComponentProps> = React.memo
           // }
           paint: {
             'fill-color': '#dcd9d1',
-            'fill-opacity': 0.4
+            'fill-opacity': 0.3
           },
           filter: ['==', 'DIVISION', 'Vazhachal']
         });
@@ -123,7 +123,7 @@ const MonitoringMapComponent: React.FC<MonitoringMapComponentProps> = React.memo
           // }
           paint: {
             'line-width': 3,
-            'line-color': '#dcd9d1',
+            'line-color': '#6c615f',
             'line-opacity': 0.5
           },
           filter: ['==', 'DIVISION', 'Vazhachal']
@@ -139,7 +139,7 @@ const MonitoringMapComponent: React.FC<MonitoringMapComponentProps> = React.memo
           // }
           paint: {
             'fill-color': '#80AE4B',
-            'fill-opacity': 0.2
+            'fill-opacity': 0.4
           },
           filter: ['!=', 'DIVISION', 'Vazhachal']
         });
@@ -155,7 +155,7 @@ const MonitoringMapComponent: React.FC<MonitoringMapComponentProps> = React.memo
           paint: {
             'line-width': 3,
             'line-color': '#80AE4B',
-            'line-opacity': 0.5
+            'line-opacity': 0.7
           },
           filter: ['!=', 'DIVISION', 'Vazhachal']
         }); 
@@ -346,49 +346,50 @@ const MonitoringMapComponent: React.FC<MonitoringMapComponentProps> = React.memo
         };
       });
 
+      const popup = new maplibregl.Popup({
+          closeButton: false,
+          closeOnClick: false
+      });
 
-      // map.on('mouseenter', 'boundary', (e) => {
-      //     // Change the cursor style as a UI indicator.
-               
-      //     const popup = new maplibregl.Popup({
-      //         closeButton: false,
-      //         closeOnClick: false
-      //     });
-      //     if (e.features && e.features.length > 0) {
+      map.on('mouseenter', 'range-area', (e) => {
+          // Change the cursor style as a UI indicator.
+          if (e.features && e.features.length > 0) {
 
-      //       map.getCanvas().style.cursor = 'pointer'; 
+            map.getCanvas().style.cursor = 'pointer'; 
 
-      //       const feature = e.features[0];
-      //       if (feature.geometry.type === 'Polygon') {
-      //       // Get the coordinates of the polygon's centroid or a point within the polygon
-      //       const coordinates = feature.geometry.coordinates[0]; // Assuming the first ring is the outer ring
-      //       const description = 'text';
+            const feature = e.features[0];
+            if (feature.geometry.type === 'Polygon') {
+            // Get the coordinates of the polygon's centroid or a point within the polygon
+            const coordinates = feature.geometry.coordinates[0]; // Assuming the first ring is the outer ring
+            const description = 'text';
 
 
-      //       // Calculate the centroid of the polygon to position the popup
-      //       const centroid = coordinates.reduce((acc, coord) => {
-      //           acc[0] += coord[0];
-      //           acc[1] += coord[1];
-      //           return acc;
-      //       }, [0, 0]).map(coord => coord / coordinates.length);
+            // Calculate the centroid of the polygon to position the popup
+            const centroid = coordinates.reduce((acc, coord) => {
+                acc[0] += coord[0];
+                acc[1] += coord[1];
+                return acc;
+            }, [0, 0]).map(coord => coord / coordinates.length) as [number, number];
 
-      //       // Ensure that if the map is zoomed out such that multiple
-      //       // copies of the feature are visible, the popup appears
-      //       // over the copy being pointed to.
-      //       while (Math.abs(e.lngLat.lng - centroid[0]) > 180) {
-      //           centroid[0] += e.lngLat.lng > centroid[0] ? 360 : -360;
-      //       }
+            // Ensure that if the map is zoomed out such that multiple
+            // copies of the feature are visible, the popup appears
+            // over the copy being pointed to.
+            while (Math.abs(e.lngLat.lng - centroid[0]) > 180) {
+                centroid[0] += e.lngLat.lng > centroid[0] ? 360 : -360;
+            }
+            
+            popup.remove();
 
-      //       // Populate the popup and set its coordinates based on the centroid
-      //       popup.setLngLat(centroid).setHTML(description).addTo(map);
-      //     }
-      //   }
-      // });
+            // Populate the popup and set its coordinates based on the centroid
+            popup.setLngLat(centroid).setHTML(description).addTo(map);
+          }
+        }
+      });
 
-      // map.on('mouseleave', 'polygons', () => {
-      //     map.getCanvas().style.cursor = '';
-      //     popup.remove();
-      // });
+      map.on('mouseleave', 'range-area', () => {
+          map.getCanvas().style.cursor = '';
+          popup.remove();
+      });
 
 
       map.on('click', (e) => {
