@@ -1,9 +1,10 @@
 {
     "MAPTILER_API_KEY": "rOzi4RnlGlqlLc5ozKz4",
     "MAP_CONFIG": {
-        "LAT": 10.650040024763096, 
-        "LON": 76.35211754905616,
-        "ZOOM": 7
+         
+        "LAT": 10.291420773373309,
+        "LON": 76.51012154156247,
+        "ZOOM": 10.5
     },
     "MAPS": {
         "MONITORING": "https://api.maptiler.com/maps/streets-v2/style.json?key=",
@@ -22,7 +23,7 @@
             "URL": "https://api.maptiler.com/data/71b00f60-6d24-48c0-adfa-0fc4d8a68083/features.json?key=rOzi4RnlGlqlLc5ozKz4"
         },
         "BUILDINGS" : {
-            "ID" : ["hq", "campshed", "power"],
+            "ID" : ["ho", "hq", "campshed", "power"],
             "URL" : "https://api.maptiler.com/data/49453ebd-0c7e-4a96-9f11-ba09eb0d8ffc/features.json?key=rOzi4RnlGlqlLc5ozKz4"
         },
         "SETTLEMENTS" : {
@@ -34,7 +35,7 @@
             "URL" : "https://api.maptiler.com/data/7988a5e4-6b3d-4784-9162-7826008cd814/features.json?key=rOzi4RnlGlqlLc5ozKz4"
         },
         "ROADS" : {
-            "ID": ["road"],
+            "ID": ["road", "checkpost"],
             "URL": "https://api.maptiler.com/data/c6d2609c-4828-44e2-8ff3-1f2776cfe9f8/features.json?key=rOzi4RnlGlqlLc5ozKz4"
         },
         "WEATHER" : {
