@@ -11,6 +11,8 @@
         "Layerwidget",
         "lightgray",
         "MAPWIDGET",
+        "PANCHAYAT",
+        "sarabun",
         "tailwindcss"
     ]
 }
