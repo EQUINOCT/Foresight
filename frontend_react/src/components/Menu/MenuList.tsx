@@ -13,12 +13,11 @@ const icons = [
 ];
 
 interface MenuListProps {
-  activeControl: string;
   activeView: string;
   setActiveView: (view: string) => void;
 }
 
-const MenuList: React.FC<MenuListProps> = ({activeControl, activeView, setActiveView}) => {
+const MenuList: React.FC<MenuListProps> = ({activeView, setActiveView}) => {
   return(
   <div className={`flex flex-col justify-center w-[88px] h-screen` }>
     <div className="flex flex-grow flex-col mb-[100px] ml-[15px] items-center justify-center w-full">
@@ -27,9 +26,7 @@ const MenuList: React.FC<MenuListProps> = ({activeControl, activeView, setActive
           {icons.map((icon, index) => (
             <li key={index} className="relative">
             <Link
-            to={icon.view === "about" || icon.view === "settings" 
-            ? `/${icon.view}` 
-            : `/${activeControl.toLowerCase()}-${icon.view}`}
+            to={`/${icon.view}`}
             className="flex flex-col items-center gap-2 text-white bg-transparent"
             style={{ textDecoration: 'none' }}
             onClick={() => {

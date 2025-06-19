@@ -8,8 +8,6 @@ import { Notifications } from "@mui/icons-material";
 import SearchIcon from '@mui/icons-material/Search';
 
 interface NavigationBarProps {
-  activeControl: string;
-  setActiveControl: (view:string) => void;
   setActiveView: (view:string) => void;
   menuItems: string[];
   activeView: string;
@@ -18,8 +16,6 @@ interface NavigationBarProps {
 }
 
 const NavigationBar: React.FC<NavigationBarProps> = ({ 
-  activeControl,
-  setActiveControl,
   setActiveView,
   menuItems,
   activeView,
@@ -80,7 +76,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
             <SearchIcon />
           </IconButton>
       </Paper>
-        {activeControl.toLowerCase() === "monitor" && activeView.toLowerCase() === "visualization" && (
+        {activeView.toLowerCase() === "visualization" && (
             <WidgetSelector 
               onWidgetToggle={onWidgetToggle}
               visibleWidgets={visibleWidgets}

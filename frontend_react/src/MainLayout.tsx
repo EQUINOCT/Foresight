@@ -10,26 +10,21 @@ interface MainLayoutProps {
 }
 
 const MainLayout: React.FC<MainLayoutProps> = ({onWidgetToggle, visibleWidgets}) => {
-  const [activeControl, setActiveControl] = useState('monitor'); // Monitor, Forecast, Impact
+  // const [activeControl, setActiveControl] = useState('monitor'); // Monitor, Forecast, Impact
   const [activeView, setActiveView] = useState('visualization'); // Visualization, Analytics, etc.
-  const menuItems = ['Monitor','Forecast','Impact'];
   // console.log('Testing');
   return (
     <div className="app-container w-full h-screen relative bg-zinc-900 bg-opacity-98">
       <div className="fixed top-0 left-0 w-full z-10">
         <NavigationBar
-        activeControl={activeControl}
-        setActiveControl={setActiveControl} 
-        setActiveView={setActiveView}
-        activeView={activeView}
-        menuItems={menuItems}
-        onWidgetToggle={onWidgetToggle}
-        visibleWidgets={visibleWidgets}
-        />
+          setActiveView={setActiveView}
+          activeView={activeView}
+          onWidgetToggle={onWidgetToggle}
+          visibleWidgets={visibleWidgets} menuItems={[]}        />
       </div>
 
       <div className="fixed left-0 top-[62px] h-[calc(100%-62px] z-10">
-       <MenuList activeControl={activeControl} activeView={activeView} setActiveView={setActiveView}/>
+       <MenuList activeView={activeView} setActiveView={setActiveView}/>
        </div>
 
       <div className="main-display absolute">
