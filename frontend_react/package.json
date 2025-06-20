@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "7.21.11",
     "@codetanzania/emis-alert": "^1.0.0",
     "@codetanzania/emis-incident": "^1.0.0",
     "@codetanzania/emis-resource": "^1.4.1",
@@ -67,7 +68,6 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "7.21.11",
     "@babel/preset-react": "^7.25.9",
     "@testing-library/jest-dom": "^6.6.2",
     "@testing-library/react": "^16.0.1",
