@@ -395,7 +395,7 @@ const MonitoringMapComponent: React.FC<MonitoringMapComponentProps> = React.memo
       map.on('click', (e) => {
 
         const feature = map.queryRenderedFeatures(e.point, {
-          layers: ['settlements', 'ho', 'hq', 'campshed', 'conflicts', "waterbody", "stream", "waterfall", "pond", "checkpost", 'road']
+          layers: ['range-area', 'range-outline', 'division-area', 'division-outline', 'settlements', 'ho', 'hq', 'campshed', 'conflicts', "waterbody", "stream", "waterfall", "pond", "checkpost", 'road']
         })[0];
         if (feature.geometry.type === 'Point') {
           var popupText;
