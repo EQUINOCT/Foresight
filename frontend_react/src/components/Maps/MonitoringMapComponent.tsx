@@ -351,45 +351,45 @@ const MonitoringMapComponent: React.FC<MonitoringMapComponentProps> = React.memo
           closeOnClick: false
       });
 
-      map.on('mouseenter', 'range-area', (e) => {
-          // Change the cursor style as a UI indicator.
-          if (e.features && e.features.length > 0) {
+      // map.on('mouseenter', 'range-area', (e) => {
+      //     // Change the cursor style as a UI indicator.
+      //     if (e.features && e.features.length > 0) {
 
-            map.getCanvas().style.cursor = 'pointer'; 
+      //       map.getCanvas().style.cursor = 'pointer'; 
 
-            const feature = e.features[0];
-            if (feature.geometry.type === 'Polygon') {
-            // Get the coordinates of the polygon's centroid or a point within the polygon
-            const coordinates = feature.geometry.coordinates[0]; // Assuming the first ring is the outer ring
-            const description = 'text';
+      //       const feature = e.features[0];
+      //       if (feature.geometry.type === 'Polygon') {
+      //       // Get the coordinates of the polygon's centroid or a point within the polygon
+      //       const coordinates = feature.geometry.coordinates[0]; // Assuming the first ring is the outer ring
+      //       const description = 'text';
 
 
-            // Calculate the centroid of the polygon to position the popup
-            const centroid = coordinates.reduce((acc, coord) => {
-                acc[0] += coord[0];
-                acc[1] += coord[1];
-                return acc;
-            }, [0, 0]).map(coord => coord / coordinates.length) as [number, number];
+      //       // Calculate the centroid of the polygon to position the popup
+      //       const centroid = coordinates.reduce((acc, coord) => {
+      //           acc[0] += coord[0];
+      //           acc[1] += coord[1];
+      //           return acc;
+      //       }, [0, 0]).map(coord => coord / coordinates.length) as [number, number];
 
-            // Ensure that if the map is zoomed out such that multiple
-            // copies of the feature are visible, the popup appears
-            // over the copy being pointed to.
-            while (Math.abs(e.lngLat.lng - centroid[0]) > 180) {
-                centroid[0] += e.lngLat.lng > centroid[0] ? 360 : -360;
-            }
+      //       // Ensure that if the map is zoomed out such that multiple
+      //       // copies of the feature are visible, the popup appears
+      //       // over the copy being pointed to.
+      //       while (Math.abs(e.lngLat.lng - centroid[0]) > 180) {
+      //           centroid[0] += e.lngLat.lng > centroid[0] ? 360 : -360;
+      //       }
             
-            popup.remove();
+      //       popup.remove();
 
-            // Populate the popup and set its coordinates based on the centroid
-            popup.setLngLat(centroid).setHTML(description).addTo(map);
-          }
-        }
-      });
+      //       // Populate the popup and set its coordinates based on the centroid
+      //       popup.setLngLat(centroid).setHTML(description).addTo(map);
+      //     }
+      //   }
+      // });
 
-      map.on('mouseleave', 'range-area', () => {
-          map.getCanvas().style.cursor = '';
-          popup.remove();
-      });
+      // map.on('mouseleave', 'range-area', () => {
+      //     map.getCanvas().style.cursor = '';
+      //     popup.remove();
+      // });
 
 
       map.on('click', (e) => {
@@ -398,7 +398,6 @@ const MonitoringMapComponent: React.FC<MonitoringMapComponentProps> = React.memo
           layers: ['settlements', 'ho', 'hq', 'campshed', 'conflicts', "waterbody", "stream", "waterfall", "pond", "checkpost", 'road']
         })[0];
         if (feature.geometry.type === 'Point') {
-          console.log(feature);
           var popupText;
           if (feature.layer.id === 'settlements') {
             popupText = `<h3>${feature.properties.NAME}</h3>
@@ -418,7 +417,6 @@ const MonitoringMapComponent: React.FC<MonitoringMapComponentProps> = React.memo
           } else {
             popupText = '<h4>No data</h4>'
           }
-          console.log(popupText);
           const coordinates = feature.geometry.coordinates as maptilersdk.LngLatLike;
           let popup = new maptilersdk.Popup().setLngLat(coordinates).setHTML(popupText).addTo(map);
         } 

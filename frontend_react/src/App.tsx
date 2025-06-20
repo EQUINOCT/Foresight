@@ -1,6 +1,6 @@
 // App.tsx
 import React, { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { useConfig } from './ConfigContext'; // Import the useConfig hook
 import MonitorScreen from './components/Screens/MonitorScreen';
 import AboutScreen from './components/Screens/AboutScreen';
@@ -17,7 +17,7 @@ const App: React.FC = () => {
       if (mapApiKey) {
          updateConfig('MAPTILER_API_KEY', process.env.REACT_APP_MAPTILER_API_KEY);
       }
-      document.title = 'insight';
+      document.title = 'foresight';
    }, [updateConfig]);
 
    const [visibleWidgets, setVisibleWidgets] = useState({
@@ -37,8 +37,8 @@ const App: React.FC = () => {
    return (
       <Routes>
          <Route path="/" element={<MainLayout onWidgetToggle={onWidgetToggle} visibleWidgets={visibleWidgets}/>} >
-            
-            <Route path="visualization" element={<MonitorScreen onWidgetToggle={onWidgetToggle} visibleWidgets={visibleWidgets}/>} />
+         {/* <Route path="/" element={<Navigate to="visualization" replace={true}/>} >  */}
+            <Route index element={<MonitorScreen onWidgetToggle={onWidgetToggle} visibleWidgets={visibleWidgets}/>} />
             <Route path="analytics" element={<MonitorAnalyticsScreen />} />    
             <Route path="about" element={<AboutScreen />} />
             <Route path="settings" element={<SettingScreen />} />
